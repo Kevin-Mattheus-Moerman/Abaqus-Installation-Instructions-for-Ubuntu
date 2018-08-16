@@ -15,7 +15,7 @@ The following line in the bash file checks the particular Linux distribution use
 ```sh
 DSY_OS_Release=`lsb_release --short --id |sed 's/ //g'`
 ```
-On Ubuntu this will cause it to be "Ubuntu". It appears however Ubuntu is not officially supported and the installation will not proceed because of this. The solution is to manually override the distribution. To do this open this file (e.g. `sudo gedit Linux.sh`) and comment out the above line (by placing a `#` in front of it). Once the line is commented out, add a new line which forces this parameter to be denote a supported distribution, e.g. `CentOS`:
+On Ubuntu this will cause it to be "Ubuntu". It appears however Ubuntu is not officially supported and the installation will not proceed because of this. The solution is to manually override the distribution. To do this open this file (e.g. `sudo gedit Linux.sh`) and comment out the above line (by placing a `#` in front of it). Once the line is commented out, add a new line which forces this parameter to denote a supported distribution, e.g. `CentOS`:
 ```sh
 DSY_OS_Release="CentOS"
 ```
