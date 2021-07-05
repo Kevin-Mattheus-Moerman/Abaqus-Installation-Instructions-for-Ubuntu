@@ -4,7 +4,7 @@
 ## 1. Install prerequisites
 
 ```
-sudo apt install csh tcsh ksh gcc g++ gfortran libstdc++5 build-essential make libjpeg62 libmotif-dev
+sudo apt install csh tcsh ksh gcc g++ gfortran libstdc++5 build-essential make libjpeg62 libmotif-dev lsb-core
 ```
 
 ## 2. Alter all `Linux.sh` files
@@ -33,11 +33,31 @@ for f in $(find //home/kevin/Downloads/AM_SIM_Abaqus_Extend.AllOS -name "Linux.s
         sudo gedit $f
 done
 ```   
-## 3. Run installation GUIs
+## 3. Set file permissions to allow execution
+Many files in the installation folder need execution permissions to be set. One quick way to do this is:
+```sh
+for f in $(find $(pwd) -type f); do
+        chmod +x $f
+done
+```
+
+## 4. Run installation GUIs
 From the relevant folders run:
 ```
 sudo ./StartGUI.sh
 ```
+
+On Ubuntu 20.10 (or any after 16.04), one may experience  something like the following error:
+````
+../1/inst/linux_a64/code/bin/DSYInsAppliGUI: error while loading shared libraries: libpng12.so.0: cannot open shared object file: No such file or directory
+````
+[This link](https://www.linuxuprising.com/2018/05/fix-libpng12-0-missing-in-ubuntu-1804.html) describes that "libpng12 is no longer available in the Ubuntu repository archives". To install it manually the following can be done, after which one can retry to run the installation:
+```
+sudo add-apt-repository ppa:linuxuprising/libpng12
+sudo apt update
+sudo apt install libpng12-0
+```
+
 ## 4. Make abaqus command available from any directory  
 `sudo ln /var/DassaultSystemes/SIMULIA/Commands/abq2018 /usr/bin/abaqus`
 
